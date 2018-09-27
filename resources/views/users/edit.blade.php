@@ -48,7 +48,7 @@
 
         </form>
 
-    @endcomponent            
+    @endcomponent
 
 @endsection
 

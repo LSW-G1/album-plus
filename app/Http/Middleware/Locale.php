@@ -10,20 +10,20 @@ class Locale
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param  \Closure                 $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (!session ()->has ('locale')) {
-            session (['locale' => $request->getPreferredLanguage (config ('app.locales'))]);
+        if (!session()->has('locale')) {
+            session(['locale' => $request->getPreferredLanguage(config('app.locales'))]);
         }
 
-        $locale = session ('locale');
+        $locale = session('locale');
 
-        app ()->setLocale ($locale);
+        app()->setLocale($locale);
 
-        setlocale (LC_TIME, app()->environment('local') ? $locale : config('locale.languages')[$locale][1]);
+        setlocale(LC_TIME, app()->environment('local') ? $locale : config('locale.languages')[$locale][1]);
 
         return $next ($request);
     }

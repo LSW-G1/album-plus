@@ -19,7 +19,7 @@
                                 <tr>
                                     <td>
                                         <div class="hover_img">
-                                            <a href="{{ url('images/' . $notification->data['image']) }}" target="_blank">{{ url('images/' . $notification->data['image']) }}<span><img src="{{ url('thumbs/' . $notification->data['image']) }}" alt="image" height="150" /></span></a>
+                                            <a href="{{ url('images/' . $notification->data['image']) }}" target="_blank">{{ url('images/' . $notification->data['image']) }}<span><img src="{{ url('thumbs/' . $notification->data['image']) }}" alt="image" height="150"/></span></a>
                                         </div>
                                     </td>
                                     <td>{{ $notification->data['rate'] }}</td>

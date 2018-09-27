@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Album;
 use App\Http\Requests\AlbumRequest;
+use App\Models\Album;
 use App\Repositories\AlbumRepository;
 use Illuminate\Http\Request;
 
@@ -36,9 +36,9 @@ class AlbumController extends Controller
      */
     public function index(Request $request)
     {
-        $userAlbums = $this->repository->getAlbums ($request->user ());
+        $userAlbums = $this->repository->getAlbums($request->user());
 
-        return view ('albums.index', compact('userAlbums'));
+        return view('albums.index', compact('userAlbums'));
     }
 
     /**
@@ -48,7 +48,7 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        return view ('albums.create');
+        return view('albums.create');
     }
 
     /**
@@ -59,9 +59,9 @@ class AlbumController extends Controller
      */
     public function store(AlbumRequest $request)
     {
-        $this->repository->create ($request->user(), $request->all ());
+        $this->repository->create($request->user(), $request->all());
 
-        return redirect ()->route('album.index')->with ('ok', __ ("L'album a bien été enregistré"));
+        return redirect()->route('album.index')->with('ok', __("L'album a bien été enregistré"));
     }
 
     /**
@@ -72,7 +72,7 @@ class AlbumController extends Controller
      */
     public function edit(Album $album)
     {
-        return view ('albums.edit', compact ('album'));
+        return view('albums.edit', compact('album'));
     }
 
     /**
@@ -86,9 +86,9 @@ class AlbumController extends Controller
     {
         $this->authorize('manage', $album);
 
-        $album->update ($request->all ());
+        $album->update($request->all());
 
-        return redirect ()->route('album.index')->with ('ok', __ ("L'album a bien été modifié"));
+        return redirect()->route('album.index')->with('ok', __("L'album a bien été modifié"));
     }
 
     /**
@@ -101,8 +101,8 @@ class AlbumController extends Controller
     {
         $this->authorize('manage', $album);
 
-        $album->delete ();
+        $album->delete();
 
-        return response ()->json ();
+        return response()->json();
     }
 }

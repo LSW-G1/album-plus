@@ -6,8 +6,7 @@
         <h1>
             {{ $orphans->count }} {{ trans_choice(__('image orpheline|images orphelines'), $orphans->count) }}
             @if($orphans->count)
-                <a class="btn btn-danger pull-right" href="{{ route('orphans.destroy') }}"
-                   role="button">@lang('Supprimer')</a>
+                <a class="btn btn-danger pull-right" href="{{ route('orphans.destroy') }}" role="button">@lang('Supprimer')</a>
             @endif
         </h1>
 

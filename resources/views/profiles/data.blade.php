@@ -5,8 +5,8 @@
         <h1>@lang('Export des données personnelles')</h1>
         <div class="card">
             <div class="card-body">
-                    <h5 class="card-title">@lang('A propos')</h5>
-                 <table class="table">
+                <h5 class="card-title">@lang('A propos')</h5>
+                <table class="table">
                     <tr>
                         <td>@lang('Rapport généré pour : ')</td>
                         <td>{{ $user->email }}</td>
@@ -19,10 +19,10 @@
                         <td>@lang("A l'url :")</td>
                         <td>{{ env('APP_URL') }}</td>
                     </tr>
-                     <tr>
-                         <td>@lang('Le :')</td>
-                         <td>{{ now()->formatLocalized('%x') }}</td>
-                     </tr>
+                    <tr>
+                        <td>@lang('Le :')</td>
+                        <td>{{ now()->formatLocalized('%x') }}</td>
+                    </tr>
                 </table>
                 <em>@lang('Vous pouvez enregistrer cette page pour conserver vos données en utilisant le menu de votre navigateur.')</em>
             </div>
@@ -62,7 +62,7 @@
                                 <td>@lang('Adresse web :')</td>
                                 <td>
                                     <div class="hover_img">
-                                        <a href="{{ url('images/' . $image->name) }}" target="_blank">{{ url('images/' . $image->name) }}<span><img src="{{ url('thumbs/' . $image->name) }}" alt="image" height="150" /></span></a>
+                                        <a href="{{ url('images/' . $image->name) }}" target="_blank">{{ url('images/' . $image->name) }}<span><img src="{{ url('thumbs/' . $image->name) }}" alt="image" height="150"/></span></a>
                                     </div>
                                 </td>
                             </tr>

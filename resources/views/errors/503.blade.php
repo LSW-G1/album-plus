@@ -1,9 +1,9 @@
 @extends('errors.base')
 
 @section('title')
-  @lang('Erreur 503')
+    @lang('Erreur 503')
 @endsection
 
 @section('text')
-  @lang("Service temporairement indisponible ou en maintenance")
+    @lang("Service temporairement indisponible ou en maintenance")
 @endsection

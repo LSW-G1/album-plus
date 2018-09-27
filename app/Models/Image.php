@@ -11,7 +11,7 @@ class Image extends Model
      */
     public function category()
     {
-        return $this->belongsTo (Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -19,7 +19,7 @@ class Image extends Model
      */
     public function albums()
     {
-        return $this->belongsToMany (Album::class);
+        return $this->belongsToMany(Album::class);
     }
 
     /**
@@ -27,7 +27,7 @@ class Image extends Model
      */
     public function user()
     {
-        return $this->belongsTo (User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -35,7 +35,7 @@ class Image extends Model
      */
     public function users()
     {
-        return $this->belongsToMany (User::class)->withPivot('rating');
+        return $this->belongsToMany(User::class)->withPivot('rating');
     }
 
     /**
@@ -48,10 +48,10 @@ class Image extends Model
     {
         $user = auth()->user();
 
-        if($user && $user->adult) {
-            return $query->with ('users', 'user')->latest ();
+        if ($user && $user->adult) {
+            return $query->with('users', 'user')->latest();
         }
 
-        return $query->with ('users', 'user')->whereAdult(false)->latest ();
+        return $query->with('users', 'user')->whereAdult(false)->latest();
     }
 }

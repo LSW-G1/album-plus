@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\ {
+use Illuminate\{
     Http\Request,
-    Notifications\DatabaseNotification
-};
+    Notifications\DatabaseNotification};
 
 class NotificationController extends Controller
 {
@@ -25,7 +24,7 @@ class NotificationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request                       $request
      * @param  \Illuminate\Notifications\DatabaseNotification $notification
      * @return \Illuminate\Http\Response
      * @internal param int $id
@@ -34,7 +33,7 @@ class NotificationController extends Controller
     {
         $notification->markAsRead();
 
-        if($request->user()->unreadNotifications->isEmpty()) {
+        if ($request->user()->unreadNotifications->isEmpty()) {
             return redirect()->route('home');
         }
 

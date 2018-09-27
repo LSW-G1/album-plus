@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Events\NameSaving;
+use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model
 {
@@ -13,7 +13,8 @@ class Album extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug',
+        'name',
+        'slug',
     ];
 
     /**
@@ -30,7 +31,7 @@ class Album extends Model
      */
     public function images()
     {
-        return $this->belongsToMany (Image::class);
+        return $this->belongsToMany(Image::class);
     }
 
     /**
@@ -38,6 +39,6 @@ class Album extends Model
      */
     public function user()
     {
-        return $this->belongsTo (User::class);
+        return $this->belongsTo(User::class);
     }
 }

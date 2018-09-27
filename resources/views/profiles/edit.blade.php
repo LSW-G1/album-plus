@@ -2,8 +2,7 @@
 
 @section('css')
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
 
 @endsection
 
@@ -30,8 +29,7 @@
 
             <div id="slider" class="form-group invisible">
                 @lang('Pagination : ')<span id="nbr">{{ $user->settings->pagination }}</span> @lang('images par page')<br>
-                <input id="pagination" name="pagination" type="number" data-slider-min="3" data-slider-max="20"
-                       data-slider-step="1" data-slider-value="{{ $user->settings->pagination }}"/><br>
+                <input id="pagination" name="pagination" type="number" data-slider-min="3" data-slider-max="20" data-slider-step="1" data-slider-value="{{ $user->settings->pagination }}"/><br>
             </div>
 
             <div class="form-group">
@@ -67,7 +65,7 @@
                 .on("change", (e) => {
                     $("#nbr").text(e.value.newValue)
                 })
-            $('#slider, a').removeClass('invisible');
+            $('#slider, a').removeClass('invisible')
         })
     </script>
 

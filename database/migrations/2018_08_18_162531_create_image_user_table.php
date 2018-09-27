@@ -10,7 +10,7 @@ class CreateImageUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_user', function (Blueprint $table) {
+        Schema::create('image_user', function(Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('rating');

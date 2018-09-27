@@ -32,7 +32,7 @@
 
         </form>
 
-    @endcomponent            
+    @endcomponent
 
 @endsection
 

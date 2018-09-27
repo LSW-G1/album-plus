@@ -40,6 +40,6 @@
 
         </form>
 
-    @endcomponent            
+    @endcomponent
 
 @endsection

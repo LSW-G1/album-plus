@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Events\UserCreated;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -28,7 +28,12 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'settings', 'email_verified_at'
+        'name',
+        'email',
+        'password',
+        'role',
+        'settings',
+        'email_verified_at',
     ];
 
     /**
@@ -37,7 +42,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -55,7 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function images()
     {
-        return $this->hasMany (Image::class);
+        return $this->hasMany(Image::class);
     }
 
     /**
@@ -63,7 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function albums()
     {
-        return $this->hasMany (Album::class);
+        return $this->hasMany(Album::class);
     }
 
     /**
@@ -71,7 +77,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function imagesRated()
     {
-        return $this->belongsToMany (Image::class);
+        return $this->belongsToMany(Image::class);
     }
 
     /**
@@ -102,7 +108,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getSettingsAttribute($value)
     {
-        return json_decode ($value);
+        return json_decode($value);
     }
 
     /**
@@ -118,14 +124,14 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Set the adult attribute.
      *
-     * @param  bool  $value
+     * @param  bool $value
      * @return void
      */
     public function setAdultAttribute($value)
     {
-        $this->attributes['settings'] = json_encode ([
-            'adult' => $value,
-            'pagination' => $this->settings->pagination
+        $this->attributes['settings'] = json_encode([
+            'adult'      => $value,
+            'pagination' => $this->settings->pagination,
         ]);
     }
 }

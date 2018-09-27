@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use App\Models\Category;
 use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
     /**
      * Create a new CategoryController instance.
-     *
      */
     public function __construct()
     {
@@ -24,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view ('categories.index');
+        return view('categories.index');
     }
 
     /**
@@ -34,7 +33,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view ('categories.create');
+        return view('categories.create');
     }
 
     /**
@@ -46,9 +45,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request, CategoryRepository $repository)
     {
-        $repository->store($request->all ());
+        $repository->store($request->all());
 
-        return redirect ()->route ('home')->with ('ok', __ ('La catégorie a bien été enregistrée'));
+        return redirect()->route('home')->with('ok', __('La catégorie a bien été enregistrée'));
     }
 
     /**
@@ -59,7 +58,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view ('categories.edit', compact ('category'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -71,9 +70,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update ($request->all ());
+        $category->update($request->all());
 
-        return redirect ()->route ('category.index')->with ('ok', __ ('La catégorie a bien été modifiée'));
+        return redirect()->route('category.index')->with('ok', __('La catégorie a bien été modifiée'));
     }
 
     /**
@@ -84,8 +83,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete ();
+        $category->delete();
 
-        return response ()->json ();
+        return response()->json();
     }
 }
