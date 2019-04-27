@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\models\CameraType;
+use App\Models\CameraType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 

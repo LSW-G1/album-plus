@@ -27,6 +27,7 @@ class ImageRepository
         $image = new Image;
         $image->description = $request->description;
         $image->category_id = $request->category_id;
+        $image->camera_type_id = $request->camera_type_id;
         $image->adult = isset($request->adult);
         $image->name = $path;
         $request->user()->images()->save($image);

@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{
-    Image,
-    User};
+use App\Models\{Image, User};
+use App\Models\CameraType;
 use App\Notifications\ImageRated;
-use App\Repositories\{
-    AlbumRepository,
-    CategoryRepository,
-    ImageRepository,
-    NotificationRepository};
+use App\Repositories\{AlbumRepository, CategoryRepository, ImageRepository, NotificationRepository};
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -39,9 +34,9 @@ class ImageController extends Controller
     /**
      * Create a new ImageController instance.
      *
-     * @param  \App\Repositories\ImageRepository    $imageRepository
-     * @param  \App\Repositories\AlbumRepository    $albumRepository
-     * @param  \App\Repositories\CategoryRepository $categoryRepository
+     * @param \App\Repositories\ImageRepository    $imageRepository
+     * @param \App\Repositories\AlbumRepository    $albumRepository
+     * @param \App\Repositories\CategoryRepository $categoryRepository
      */
     public function __construct(ImageRepository $imageRepository, AlbumRepository $albumRepository, CategoryRepository $categoryRepository)
     {
@@ -54,7 +49,7 @@ class ImageController extends Controller
      * Display a listing of albums for image
      *
      * @param \Illuminate\Http\Request $request
-     * @param  \App\Models\Image       $image
+     * @param \App\Models\Image        $image
      * @return \Illuminate\Http\Response
      */
     public function albums(Request $request, Image $image)
@@ -70,14 +65,15 @@ class ImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  \App\Models\Image       $image
+     * @param \App\Models\Image        $image
      * @return \Illuminate\Http\Response
      */
     public function albumsUpdate(Request $request, Image $image)
     {
         $this->authorize('manage', $image);
 
-        $image->albums()->sync($request->albums);
+        $image->albums()
+            ->sync($request->albums);
 
         $path = pathinfo(parse_url(url()->previous())['path']);
 
@@ -97,7 +93,7 @@ class ImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  \App\Models\Image       $image
+     * @param \App\Models\Image        $image
      * @return \App\models\Image
      */
     public function descriptionUpdate(Request $request, Image $image)
@@ -118,7 +114,7 @@ class ImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  \App\Models\Image       $image
+     * @param \App\Models\Image        $image
      * @return \Illuminate\Http\Response
      */
     public function adultUpdate(Request $request, Image $image)
@@ -138,13 +134,15 @@ class ImageController extends Controller
      */
     public function create()
     {
-        return view('images.create');
+        $cameras = CameraType::all();
+
+        return view('images.create', compact("cameras"));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -163,7 +161,7 @@ class ImageController extends Controller
     /**
      * Display a listing of the images for the specified category.
      *
-     * @param  string $slug
+     * @param string $slug
      * @return \Illuminate\Http\Response
      */
     public function category($slug)
@@ -177,7 +175,7 @@ class ImageController extends Controller
     /**
      * Display a listing of the images for the specified album.
      *
-     * @param  string $slug
+     * @param string $slug
      * @return \Illuminate\Http\Response
      */
     public function album($slug)
@@ -191,7 +189,7 @@ class ImageController extends Controller
     /**
      * Display a listing of the images for the specified user.
      *
-     * @param  \App\Models\User $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function user(User $user)
@@ -204,7 +202,7 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Image $image
+     * @param \App\Models\Image $image
      * @return \Illuminate\Http\Response
      */
     public function destroy(Image $image)
@@ -236,9 +234,9 @@ class ImageController extends Controller
     /**
      * Rate the image.
      *
-     * @param  \Illuminate\Http\Request                 $request
-     * @param  \App\Repositories\NotificationRepository $notificationRepository
-     * @param  \App\Models\Image
+     * @param \Illuminate\Http\Request                 $request
+     * @param \App\Repositories\NotificationRepository $notificationRepository
+     * @param \App\Models\Image
      * @return array
      */
     public function rate(Request $request, NotificationRepository $notificationRepository, Image $image)
@@ -277,11 +275,13 @@ class ImageController extends Controller
      */
     public function click(Request $request, Image $image)
     {
-        if ($request->session()->has('images') && in_array($image->id, session('images'))) {
+        if ($request->session()
+                ->has('images') && in_array($image->id, session('images'))) {
             return response()->json(['increment' => false]);
         }
 
-        $request->session()->push('images', $image->id);
+        $request->session()
+            ->push('images', $image->id);
 
         $image->increment('clicks');
 

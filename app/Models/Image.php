@@ -56,11 +56,11 @@ class Image extends Model
         $user = auth()->user();
 
         if ($user && $user->adult) {
-            return $query->with('users', 'user')
+            return $query->with('users', 'user', 'cameraType')
                 ->latest();
         }
 
-        return $query->with('users', 'user')
+        return $query->with('users', 'user', 'cameraType')
             ->whereAdult(false)
             ->latest();
     }

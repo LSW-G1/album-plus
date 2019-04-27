@@ -37,6 +37,15 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="camera_type_id">@lang('Type de Caméra')</label>
+                <select id="camera_type_id" name="camera_type_id" class="form-control">
+                    @foreach($cameras as $camera)
+                        <option value="{{ $camera->id }}">{{ $camera->libelle }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             @include('partials.form-group', [
                 'title' => __('Description (optionnelle)'),
                 'type' => 'text',

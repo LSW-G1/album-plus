@@ -91,6 +91,7 @@
                                     </form>
                                 @endadminOrOwner
                             </span>
+                            <span class="badge badge-secondary">{{ optional($image->cameraType)->libelle }}</span>
                         </div>
                     </div>
                 </div>
