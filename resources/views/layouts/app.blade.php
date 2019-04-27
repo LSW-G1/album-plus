@@ -102,6 +102,9 @@
                                 <a class="dropdown-item" href="{{ route('album.create') }}">
                                     <i class="fas fa-folder-open fa-lg"></i> @lang('Ajouter un album')
                                 </a>
+                                <a class="dropdown-item" href="{{ route('cameras.create') }}">
+                                    <i class="fas fa-camera fa-lg"></i> @lang('Ajouter un type de caméra')
+                                </a>
                                 <a class="dropdown-item" href="{{ route('album.index') }}">
                                     <i class="fas fa-wrench fa-lg"></i> @lang('Gérer les albums')
                                 </a>

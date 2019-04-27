@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Repositories\{AlbumRepository, CategoryRepository};
 use Illuminate\Support\Facades\Blade;
-use App\Repositories\ { CategoryRepository, AlbumRepository };
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,27 +15,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::if ('admin', function () {
-            return auth ()->check () && auth ()->user ()->admin;
+        Blade::if('admin', function () {
+            return auth()->check() && auth()->user()->admin;
         });
 
-        Blade::if ('maintenance', function () {
-            return auth ()->check () && auth ()->user ()->admin && app()->isDownForMaintenance();
+        Blade::if('maintenance', function () {
+            return auth()->check() && auth()->user()->admin && app()->isDownForMaintenance();
         });
 
-        Blade::if ('adminOrOwner', function ($id) {
-            return auth ()->check () && (auth ()->id () === $id || auth ()->user ()->admin);
+        Blade::if('adminOrOwner', function ($id) {
+            return auth()->check() && (auth()->id() === $id || auth()->user()->admin);
         });
 
-        if (request ()->server ("SCRIPT_NAME") !== 'artisan') {
+        if (request()->server("PHP_SELF") !== 'artisan') {
+            view()->share('categories', resolve(CategoryRepository::class)->getAll());
 
-            view ()->share ('categories', resolve(CategoryRepository::class)->getAll());
-
-            view ()->composer('layouts.app', function ($view)
-            {
-                if(auth()->check()) {
-                    $albums = resolve (AlbumRepository::class)->getByUser(auth()->id());
-                    if($albums->isNotEmpty()) {
+            view()->composer('layouts.app', function ($view) {
+                if (auth()->check()) {
+                    $albums = resolve(AlbumRepository::class)->getByUser(auth()->id());
+                    if ($albums->isNotEmpty()) {
                         $view->with('albums', $albums);
                     }
                 }

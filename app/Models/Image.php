@@ -3,9 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Image extends Model
 {
+    public function cameraType(): BelongsTo
+    {
+        return $this->belongsTo(CameraType::class);
+    }
+
     /**
      * Get the category that owns the image.
      */
@@ -35,7 +41,8 @@ class Image extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('rating');
+        return $this->belongsToMany(User::class)
+            ->withPivot('rating');
     }
 
     /**
@@ -49,9 +56,12 @@ class Image extends Model
         $user = auth()->user();
 
         if ($user && $user->adult) {
-            return $query->with('users', 'user')->latest();
+            return $query->with('users', 'user')
+                ->latest();
         }
 
-        return $query->with('users', 'user')->whereAdult(false)->latest();
+        return $query->with('users', 'user')
+            ->whereAdult(false)
+            ->latest();
     }
 }

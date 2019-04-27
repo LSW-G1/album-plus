@@ -17,12 +17,14 @@ class CreateImagesTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('camera_type_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('description')->nullable();
             $table->boolean('adult')->default(false);
             $table->integer('clicks')->unsigned()->default(0);
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('camera_type_id')->references('id')->on('camera_types')->onDelete('cascade');
             $table->timestamps();
         });
     }

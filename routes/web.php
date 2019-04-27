@@ -23,6 +23,8 @@ Route::middleware ('admin')->group (function () {
         Route::name ('index')->get ('/', 'AdminController@edit');
         Route::name ('update')->put ('/', 'AdminController@update');
     });
+
+    Route::resource("cameras", "CameraTypeController");
 });
 
 Route::middleware ('auth', 'verified')->group (function () {
